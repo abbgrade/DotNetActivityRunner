@@ -1,4 +1,5 @@
 # DotNetActivityRunner
+[![Build Status](https://travis-ci.org/abbgrade/DotNetActivityRunner.svg?branch=master)](https://travis-ci.org/abbgrade/DotNetActivityRunner)
 
 Generates an environment to execute a Azure Data Factory DotNetActivity withour HDInsight.
 
