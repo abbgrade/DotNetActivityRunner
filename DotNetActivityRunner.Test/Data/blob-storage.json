@@ -1,0 +1,11 @@
+{
+  "name": "blob-storage",
+  "properties": {
+    "description": "",
+    "type": "AzureStorage",
+    "typeProperties": {
+      "connectionString": "<AzureStorageConnectionSting>"
+    }
+  },
+  "$schema": "http://datafactories.schema.management.azure.com/schemas/2015-09-01/Microsoft.DataFactory.LinkedService.json"
+}

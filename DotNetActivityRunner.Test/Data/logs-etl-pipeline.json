@@ -1,0 +1,37 @@
+{
+  "name": "logs-etl-pipeline",
+  "properties": {
+    "description": "",
+    "activities": [
+      {
+        "type": "DotNetActivity",
+        "inputs": [
+          {
+            "name": "import-month-dataset"
+          }
+        ],
+        "outputs": [
+          {
+            "name": "fact-month-dataset"
+          }
+        ],
+        "policy": {
+          "timeout": "00:30:00",
+          "concurrency": 1,
+          "retry": 1
+        },
+        "scheduler": {
+          "frequency": "Month",
+          "interval": 1
+        },
+        "name": "stage",
+        "linkedServiceName": "speed-hadoop"
+      }
+    ],
+    "start": "2015-01-01T00:00:00Z",
+    "end": "2016-03-01T00:00:00Z",
+    "isPaused": false,
+    "pipelineMode": "Scheduled"
+  },
+  "$schema": "http://datafactories.schema.management.azure.com/schemas/2015-09-01/Microsoft.DataFactory.Pipeline.json"
+}

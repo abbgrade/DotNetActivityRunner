@@ -1,0 +1,23 @@
+{
+  "name": "import-month-dataset",
+  "properties": {
+    "published": false,
+    "type": "AzureBlob",
+    "linkedServiceName": "blob-storage",
+    "typeProperties": {
+      "fileName": "test.txt",
+      "folderPath": "import/logs",
+      "format": {
+        "type": "TextFormat",
+        "columnDelimiter": ","
+      }
+    },
+    "availability": {
+      "frequency": "Month",
+      "interval": 1
+    },
+    "external": true,
+    "policy": {}
+  },
+  "$schema": "http://datafactories.schema.management.azure.com/schemas/2015-09-01/Microsoft.DataFactory.Table.json"
+}

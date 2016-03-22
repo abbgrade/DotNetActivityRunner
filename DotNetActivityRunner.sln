@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetActivityRunner.Test", "DotNetActivityRunner.Test\DotNetActivityRunner.Test.csproj", "{77F53D37-3FFE-40E1-928E-048C876B3C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetActivityRunner", "DotNetActivityRunner\DotNetActivityRunner.csproj", "{F4BA3E87-79B3-44D3-942F-5043B8F4F7C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77F53D37-3FFE-40E1-928E-048C876B3C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F53D37-3FFE-40E1-928E-048C876B3C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F53D37-3FFE-40E1-928E-048C876B3C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F53D37-3FFE-40E1-928E-048C876B3C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BA3E87-79B3-44D3-942F-5043B8F4F7C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BA3E87-79B3-44D3-942F-5043B8F4F7C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BA3E87-79B3-44D3-942F-5043B8F4F7C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BA3E87-79B3-44D3-942F-5043B8F4F7C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
