@@ -1,7 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DfModels = Microsoft.Azure.Management.DataFactories.Models;
 using DfRuntime = Microsoft.Azure.Management.DataFactories.Runtime;
 
@@ -30,7 +32,14 @@ namespace DotNetActivityRunner.Test
                 out linkedServices, out datasets, out activity);
 
             Assert.AreEqual(2, linkedServices.Count);
-            Assert.AreEqual(2, datasets.Count);
+            Assert.AreEqual(3, datasets.Count);
+
+            DfModels.Dataset importDataset = datasets.Where(dataset => dataset.Name == "import-month-dataset").Single();
+            Assert.IsInstanceOfType(importDataset.Properties.TypeProperties, typeof(DfModels.AzureBlobDataset));
+            DfModels.Dataset factDataset = datasets.Where(dataset => dataset.Name == "fact-month-dataset").Single();
+            Assert.IsInstanceOfType(factDataset.Properties.TypeProperties, typeof(DfModels.AzureBlobDataset));
+            DfModels.Dataset factTable = datasets.Where(dataset => dataset.Name == "fact-month-table").Single();
+            Assert.IsInstanceOfType(factTable.Properties.TypeProperties, typeof(DfModels.AzureTableDataset));
 
             // run the activity
             DfRuntime.IDotNetActivity testedActivity = new TestActivity();

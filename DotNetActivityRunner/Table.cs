@@ -6,5 +6,6 @@ namespace DotNetActivityRunner
     {
         [JsonProperty("properties")]
         public TableProperties Properties { get; internal set; }
+
     }
 }

@@ -13,6 +13,9 @@
         "outputs": [
           {
             "name": "fact-month-dataset"
+          },
+          {
+            "name": "fact-month-table"
           }
         ],
         "policy": {

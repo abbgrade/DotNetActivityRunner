@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using CommonModels = Microsoft.Azure.Management.DataFactories.Common.Models;
@@ -30,6 +31,8 @@ namespace DotNetActivityRunner
                 if (dummyActivity.Name != activityName)
                     continue;
 
+                activity.Name = dummyActivity.Name;
+
                 // get the input and output tables
                 var dummyDatasets = new HashSet<ActivityData>();
                 dummyDatasets.UnionWith(dummyActivity.Inputs);
@@ -45,14 +48,43 @@ namespace DotNetActivityRunner
                     var dataJson = File.ReadAllText(dataPath);
                     var dummyTable = JsonConvert.DeserializeObject<Table>(dataJson);
 
-                    // init the azure model
-                    var blobDataset = new Models.AzureBlobDataset();
-                    blobDataset.FolderPath = dummyTable.Properties.TypeProperties.FolderPath;
-                    blobDataset.FileName = dummyTable.Properties.TypeProperties.FileName;
+                    {
+                        // initialize dataset properties
+                        Models.DatasetTypeProperties datasetProperties;
+                        switch (dummyTable.Properties.Type)
+                        {
+                            case "AzureBlob":
+                                // init the azure model
+                                var blobDataset = new Models.AzureBlobDataset();
+                                blobDataset.FolderPath = dummyTable.Properties.TypeProperties.FolderPath;
+                                blobDataset.FileName = dummyTable.Properties.TypeProperties.FileName;
+                                datasetProperties = blobDataset;
+                                break;
 
-                    var dataDataset = new Models.Dataset(dummyDataset.Name, new Models.DatasetProperties(blobDataset, new CommonModels.Availability(), ""));
-                    dataDataset.Properties.LinkedServiceName = dummyTable.Properties.LinkedServiceName;
-                    datasets.Add(dataDataset);
+                            case "AzureTable":
+                                var tableDataset = new Models.AzureTableDataset();
+                                tableDataset.TableName = dummyTable.Properties.TypeProperties.TableName;
+                                datasetProperties = tableDataset;
+                                break;
+
+                            default:
+                                throw new Exception(string.Format("Unexpected Dataset.Type {0}", dummyTable.Properties.Type));
+                        }
+
+                        // initialize dataset
+                        {
+                            var dataDataset = new Models.Dataset(
+                                dummyDataset.Name,
+                                new Models.DatasetProperties(
+                                    datasetProperties,
+                                    new CommonModels.Availability(),
+                                    ""
+                                )
+                            );
+                            dataDataset.Properties.LinkedServiceName = dummyTable.Properties.LinkedServiceName;
+                            datasets.Add(dataDataset);
+                        }
+                    }
 
                     // register the input or output in the activity
                     if (dummyDataset is ActivityInput)
@@ -109,6 +141,9 @@ namespace DotNetActivityRunner
                     linkedServices.Add(linkedService);
                 }
             }
+
+            if (activity.Name == null)
+                throw new Exception(string.Format("Activity {0} not found.", activityName));
         }
     }
 }

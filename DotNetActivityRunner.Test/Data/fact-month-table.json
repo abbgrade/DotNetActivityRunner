@@ -1,0 +1,16 @@
+{
+  "name": "fact-month-table",
+  "properties": {
+    "published": false,
+    "type": "AzureTable",
+    "linkedServiceName": "blob-storage",
+    "typeProperties": {
+      "tableName": "logs"
+    },
+    "availability": {
+      "frequency": "Month",
+      "interval": 1
+    }
+  },
+  "$schema": "http://datafactories.schema.management.azure.com/schemas/2015-09-01/Microsoft.DataFactory.Table.json"
+}

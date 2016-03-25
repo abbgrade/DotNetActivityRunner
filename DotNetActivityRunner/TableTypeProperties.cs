@@ -9,5 +9,8 @@ namespace DotNetActivityRunner
 
         [JsonProperty("fileName")]
         public string FileName { get; internal set; }
+        
+        [JsonProperty("tableName")]
+        public string TableName { get; internal set; }
     }
 }
