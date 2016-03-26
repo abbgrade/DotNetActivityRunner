@@ -5,6 +5,11 @@
     "activities": [
       {
         "type": "DotNetActivity",
+        "typeProperties": {
+            "extendedProperties": {
+              "SliceStart": "Once"
+            }
+        },
         "inputs": [
           {
             "name": "import-month-dataset"

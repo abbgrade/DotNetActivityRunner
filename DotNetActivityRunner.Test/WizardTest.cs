@@ -15,13 +15,13 @@ namespace DotNetActivityRunner.Test
         [TestMethod]
         public void TestInitParameters()
         {
-            // uninitialized Params
+            // uninitialized parameters
             List<DfModels.LinkedService> linkedServices = null;
             List<DfModels.Dataset> datasets = null;
             DfModels.Activity activity = null;
             DfRuntime.IActivityLogger logger = new ActivityLogger();
 
-            // testdata
+            // test data
             var pipelinePath = Path.GetFullPath(@"..\..\Data\logs-etl-pipeline.json");
             var activityName = "stage";
 
@@ -34,12 +34,18 @@ namespace DotNetActivityRunner.Test
             Assert.AreEqual(2, linkedServices.Count);
             Assert.AreEqual(3, datasets.Count);
 
+            // test datasets
             DfModels.Dataset importDataset = datasets.Where(dataset => dataset.Name == "import-month-dataset").Single();
             Assert.IsInstanceOfType(importDataset.Properties.TypeProperties, typeof(DfModels.AzureBlobDataset));
             DfModels.Dataset factDataset = datasets.Where(dataset => dataset.Name == "fact-month-dataset").Single();
             Assert.IsInstanceOfType(factDataset.Properties.TypeProperties, typeof(DfModels.AzureBlobDataset));
             DfModels.Dataset factTable = datasets.Where(dataset => dataset.Name == "fact-month-table").Single();
             Assert.IsInstanceOfType(factTable.Properties.TypeProperties, typeof(DfModels.AzureTableDataset));
+
+            // test activity
+            Assert.IsInstanceOfType(activity.TypeProperties, typeof(DfModels.DotNetActivity));
+            var activityProperties = (DfModels.DotNetActivity)activity.TypeProperties;
+            Assert.AreEqual("Once", activityProperties.ExtendedProperties["SliceStart"]);
 
             // run the activity
             DfRuntime.IDotNetActivity testedActivity = new TestActivity();
