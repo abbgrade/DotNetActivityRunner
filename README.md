@@ -8,6 +8,11 @@ Generates an environment to execute an Azure Data Factory DotNetActivity without
 - You want to develop unittests for your IDotNetActivity. But don't want to use a Hadoop Cluster on Azure each time.
 - You want a simple environment for debugging.
 
+## Changelog
+
+- [x] AzureBlobDataset
+- [x] AzureTableDataset
+
 ## Usage
 
 The library Microsoft.Azure.Management.DataFactories must be installed. You can install it easily using NuGet.
