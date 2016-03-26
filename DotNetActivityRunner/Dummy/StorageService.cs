@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace DotNetActivityRunner
+namespace DotNetActivityRunner.Dummy
 {
     public class StorageService : LinkedService
     {

@@ -23,7 +23,7 @@ namespace DotNetActivityRunner
 
             // parse the pipeline json source
             var pipelineJson = File.ReadAllText(pipelinePath);
-            var dummyPipeline = JsonConvert.DeserializeObject<Pipeline>(pipelineJson);
+            var dummyPipeline = JsonConvert.DeserializeObject<Dummy.Pipeline>(pipelineJson);
 
             foreach (var dummyActivity in dummyPipeline.Properties.Activities)
             {
@@ -34,11 +34,11 @@ namespace DotNetActivityRunner
                 activity.Name = dummyActivity.Name;
 
                 // get the input and output tables
-                var dummyDatasets = new HashSet<ActivityData>();
+                var dummyDatasets = new HashSet<Dummy.ActivityData>();
                 dummyDatasets.UnionWith(dummyActivity.Inputs);
                 dummyDatasets.UnionWith(dummyActivity.Outputs);
 
-                var dummyServices = new HashSet<LinkedService>();
+                var dummyServices = new HashSet<Dummy.LinkedService>();
 
                 // init the data tables
                 foreach (var dummyDataset in dummyDatasets)
@@ -46,7 +46,7 @@ namespace DotNetActivityRunner
                     // parse the table json source
                     var dataPath = Path.Combine(Path.GetDirectoryName(pipelinePath), dummyDataset.Name + ".json");
                     var dataJson = File.ReadAllText(dataPath);
-                    var dummyTable = JsonConvert.DeserializeObject<Table>(dataJson);
+                    var dummyTable = JsonConvert.DeserializeObject<Dummy.Table>(dataJson);
 
                     {
                         // initialize dataset properties
@@ -87,16 +87,16 @@ namespace DotNetActivityRunner
                     }
 
                     // register the input or output in the activity
-                    if (dummyDataset is ActivityInput)
+                    if (dummyDataset is Dummy.ActivityInput)
                         activity.Inputs.Add(new CommonModels.ActivityInput(dummyDataset.Name));
 
-                    if (dummyDataset is ActivityOutput)
+                    if (dummyDataset is Dummy.ActivityOutput)
                         activity.Outputs.Add(new CommonModels.ActivityOutput(dummyDataset.Name));
 
                     // parse the linked service json source for later use
                     var servicePath = Path.Combine(Path.GetDirectoryName(pipelinePath), dummyTable.Properties.LinkedServiceName + ".json");
                     var serviceJson = File.ReadAllText(servicePath);
-                    var storageService = JsonConvert.DeserializeObject<StorageService>(serviceJson);
+                    var storageService = JsonConvert.DeserializeObject<Dummy.StorageService>(serviceJson);
 
                     dummyServices.Add(storageService);
                 }
@@ -105,7 +105,7 @@ namespace DotNetActivityRunner
                 {
                     var servicePath = Path.Combine(Path.GetDirectoryName(pipelinePath), dummyActivity.LinkedServiceName + ".json");
                     var serviceJson = File.ReadAllText(servicePath);
-                    var computeService = JsonConvert.DeserializeObject<ComputeService>(serviceJson);
+                    var computeService = JsonConvert.DeserializeObject<Dummy.ComputeService>(serviceJson);
 
                     dummyServices.Add(computeService);
                 }
@@ -116,9 +116,9 @@ namespace DotNetActivityRunner
                     Models.LinkedService linkedService = null;
 
                     // init if it is a storage service
-                    if (dummyService is StorageService)
+                    if (dummyService is Dummy.StorageService)
                     {
-                        var dummyStorageService = dummyService as StorageService;
+                        var dummyStorageService = dummyService as Dummy.StorageService;
 
                         var service = new Models.AzureStorageLinkedService();
                         service.ConnectionString = dummyStorageService.Properties.TypeProperties.ConnectionString;
@@ -129,7 +129,7 @@ namespace DotNetActivityRunner
                     }
 
                     // init if it is a hd insight service
-                    if (dummyService is ComputeService)
+                    if (dummyService is Dummy.ComputeService)
                     {
                         var service = new Models.HDInsightLinkedService();
                         linkedService = new Models.LinkedService(

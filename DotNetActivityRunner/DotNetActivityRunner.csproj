@@ -82,22 +82,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity.cs" />
-    <Compile Include="ActivityData.cs" />
-    <Compile Include="ActivityInput.cs" />
+    <Compile Include="Dummy\Activity.cs" />
+    <Compile Include="Dummy\ActivityData.cs" />
+    <Compile Include="Dummy\ActivityInput.cs" />
     <Compile Include="ActivityLogger.cs" />
-    <Compile Include="ActivityOutput.cs" />
-    <Compile Include="ComputeService.cs" />
-    <Compile Include="LinkedService.cs" />
-    <Compile Include="Pipeline.cs" />
-    <Compile Include="PipelineProperties.cs" />
+    <Compile Include="Dummy\ActivityOutput.cs" />
+    <Compile Include="Dummy\ComputeService.cs" />
+    <Compile Include="Dummy\LinkedService.cs" />
+    <Compile Include="Dummy\Pipeline.cs" />
+    <Compile Include="Dummy\PipelineProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StorageService.cs" />
-    <Compile Include="StorageServiceProperties.cs" />
-    <Compile Include="StorageServiceTypeProperties.cs" />
-    <Compile Include="Table.cs" />
-    <Compile Include="TableProperties.cs" />
-    <Compile Include="TableTypeProperties.cs" />
+    <Compile Include="Dummy\StorageService.cs" />
+    <Compile Include="Dummy\StorageServiceProperties.cs" />
+    <Compile Include="Dummy\StorageServiceTypeProperties.cs" />
+    <Compile Include="Dummy\Table.cs" />
+    <Compile Include="Dummy\TableProperties.cs" />
+    <Compile Include="Dummy\TableTypeProperties.cs" />
     <Compile Include="Wizard.cs" />
   </ItemGroup>
   <ItemGroup>

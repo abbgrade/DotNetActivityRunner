@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace DotNetActivityRunner
+namespace DotNetActivityRunner.Dummy
 {
     public class PipelineProperties
     {
