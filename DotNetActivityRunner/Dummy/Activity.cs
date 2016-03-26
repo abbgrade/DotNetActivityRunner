@@ -8,6 +8,9 @@ namespace DotNetActivityRunner.Dummy
         [JsonProperty("name")]
         public string Name { get; internal set; }
 
+        [JsonProperty("typeProperties")]
+        public ActivityTypeProperties TypeProperties { get; internal set; }
+
         [JsonProperty("inputs")]
         public List<ActivityInput> Inputs { get; internal set; }
 

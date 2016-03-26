@@ -87,6 +87,7 @@
     <Compile Include="Dummy\ActivityInput.cs" />
     <Compile Include="ActivityLogger.cs" />
     <Compile Include="Dummy\ActivityOutput.cs" />
+    <Compile Include="Dummy\ActivityTypeProperties.cs" />
     <Compile Include="Dummy\ComputeService.cs" />
     <Compile Include="Dummy\LinkedService.cs" />
     <Compile Include="Dummy\Pipeline.cs" />

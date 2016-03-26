@@ -33,6 +33,14 @@ namespace DotNetActivityRunner
 
                 activity.Name = dummyActivity.Name;
 
+                // init properties
+                var properties = new Models.DotNetActivity();
+                properties.ExtendedProperties = new Dictionary<string, string>();
+                if (dummyActivity.TypeProperties is Dummy.ActivityTypeProperties)
+                    foreach (var item in dummyActivity.TypeProperties.ExtendedProperties)
+                        properties.ExtendedProperties.Add(item.Key, item.Value);
+                activity.TypeProperties = properties;
+
                 // get the input and output tables
                 var dummyDatasets = new HashSet<Dummy.ActivityData>();
                 dummyDatasets.UnionWith(dummyActivity.Inputs);
